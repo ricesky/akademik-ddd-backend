@@ -1,20 +1,121 @@
 package value_object_test
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
 	vo "its.id/akademik/presensi/domain/value_object"
 )
 
-func Test_JadwalPertemuan(t *testing.T) {
+func Test_waktu_mulai_selesai_tidak_boleh_sama(t *testing.T) {
 
-	wm := time.Now()
-	ws := time.Now()
+	tt := time.Date(2023, 05, 13, 0, 0, 0, 0, time.Local)
 
-	j, _ := vo.NewJadwalPertemuan(wm, ws)
+	j, err := vo.NewJadwalPertemuan(tt, tt)
 
-	if j.WaktuMulai() != j.WaktuSelesai() {
-		t.Fatal("a and  b were not equal")
+	if err != nil {
+		fmt.Println(err.Error())
 	}
+
+	if err == nil {
+		t.Fatal("seharusnya ada pesan error")
+	}
+
+	if !j.WaktuMulai().IsZero() {
+		t.Fatal("waktu mulai seharusnya zero")
+	}
+
+	if !j.WaktuSelesai().IsZero() {
+		t.Fatal("waktu selesai seharusnya zero")
+	}
+
+}
+
+func Test_waktu_mulai_tidak_boleh_lebih_dari_waktu_selesai(t *testing.T) {
+
+	waktuMulai := time.Date(2023, 05, 13, 1, 0, 0, 0, time.Local)
+	waktuSelesai := time.Date(2023, 05, 13, 0, 0, 0, 0, time.Local)
+
+	j, err := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	if err == nil {
+		t.Fatal("seharusnya ada pesan error")
+	}
+
+	if !j.WaktuMulai().IsZero() {
+		t.Fatal("waktu mulai seharusnya zero")
+	}
+
+	if !j.WaktuSelesai().IsZero() {
+		t.Fatal("waktu selesai seharusnya zero")
+	}
+
+}
+
+func Test_argumen_waktu_mulai_tidak_boleh_kosong(t *testing.T) {
+
+	tt := time.Time{}
+
+	j, err := vo.NewJadwalPertemuan(tt, tt)
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	if err == nil {
+		t.Fatal("seharusnya ada pesan error")
+	}
+
+	if !j.WaktuMulai().IsZero() {
+		t.Fatal("waktu mulai seharusnya zero")
+	}
+
+	if !j.WaktuSelesai().IsZero() {
+		t.Fatal("waktu selesai seharusnya zero")
+	}
+}
+
+func Test_argumen_waktu_selesai_tidak_boleh_kosong(t *testing.T) {
+
+	waktuMulai := time.Date(2023, 05, 13, 1, 0, 0, 0, time.Local)
+	waktuSelesai := time.Time{}
+
+	j, err := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	if err == nil {
+		t.Fatal("seharusnya ada pesan error")
+	}
+
+	if !j.WaktuMulai().IsZero() {
+		t.Fatal("waktu mulai seharusnya zero")
+	}
+
+	if !j.WaktuSelesai().IsZero() {
+		t.Fatal("waktu selesai seharusnya zero")
+	}
+}
+
+func Test_equality(t *testing.T) {
+
+	waktuMulai := time.Date(2023, 05, 13, 1, 0, 0, 0, time.Local)
+	waktuSelesai := time.Date(2023, 05, 13, 2, 0, 0, 0, time.Local)
+
+	j1, _ := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+	j2, _ := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+
+	equal := j1.Equals(j2)
+
+	if !equal {
+		t.Fatal("hasil perbandingan tidak sama")
+	}
+
 }
