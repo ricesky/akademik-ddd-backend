@@ -32,14 +32,14 @@ func (s *SqlServerDosenQuery) Execute(userId string) (*query.Dosen, error) {
 	defer rows.Close()
 
 	if rows.Next() {
-		var id_dosen uuid.UUID
+		var id uuid.UUID
 		var nama string
-		err = rows.Scan(&id_dosen, &nama)
+		err = rows.Scan(&id, &nama)
 		if err != nil {
 			return nil, err
 		}
 
-		return &query.Dosen{DosenId: id_dosen, Nama: nama}, nil
+		return &query.Dosen{DosenId: id, Nama: nama}, nil
 	}
 
 	return nil, nil
