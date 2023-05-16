@@ -1,19 +1,19 @@
 package entity
 
 import (
-	"github.com/google/uuid"
+	vo "its.id/akademik/presensi/domain/value_object"
 )
 
 type Dosen struct {
-	id   uuid.UUID
+	id   vo.DosenId
 	nama string
 }
 
-func NewDosen(id uuid.UUID, nama string) *Dosen {
+func NewDosen(id vo.DosenId, nama string) *Dosen {
 	return &Dosen{id, nama}
 }
 
-func (d *Dosen) ID() uuid.UUID {
+func (d *Dosen) ID() vo.DosenId {
 	return d.id
 }
 

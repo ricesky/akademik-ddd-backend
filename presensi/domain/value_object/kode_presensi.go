@@ -2,6 +2,8 @@ package value_object
 
 import (
 	"errors"
+	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -25,7 +27,22 @@ func NewKodePresensi(kode string, berlakuSampai time.Time) (KodePresensi, error)
 	}
 
 	return KodePresensi{kode, berlakuSampai}, nil
+}
 
+func NewNilKodePresensi() KodePresensi {
+	return KodePresensi{kode: "", berlakuSampai: time.Time{}}
+}
+
+func BuatKodePresensiBaru(masaBerlaku time.Time) (KodePresensi, error) {
+
+	var kode string
+
+	for digit := 1; digit <= 6; digit++ {
+		rand := strconv.Itoa(rand.Intn(10))
+		kode += rand
+	}
+
+	return NewKodePresensi(kode, masaBerlaku)
 }
 
 func (k KodePresensi) Kode() string {
@@ -34,4 +51,8 @@ func (k KodePresensi) Kode() string {
 
 func (k KodePresensi) BerlakuSampai() time.Time {
 	return k.berlakuSampai
+}
+
+func (k KodePresensi) IsNil() bool {
+	return len(k.kode) == 0 && k.berlakuSampai.IsZero()
 }

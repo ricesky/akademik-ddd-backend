@@ -33,9 +33,9 @@ func setCallbackCookie(w http.ResponseWriter, r *http.Request, name, value strin
 	http.SetCookie(w, c)
 }
 
-func Login(c *gin.Context) {
+func Login(ctx *gin.Context) {
 
-	provider, err := oidc.NewProvider(c, "https://my.its.ac.id")
+	provider, err := oidc.NewProvider(ctx, "https://my.its.ac.id")
 
 	if err != nil {
 		log.Fatal(err.Error())
@@ -44,7 +44,7 @@ func Login(c *gin.Context) {
 	config := oauth2.Config{
 		ClientID:     "3D03943B-2BB1-4F7A-8956-9E49E609A253",
 		ClientSecret: "o5q8poz3i34c0ggkkgc8occ0",
-		RedirectURL:  "https://localhost:3000/auth",
+		RedirectURL:  "https://localhost:5556/auth",
 
 		// Discovery returns the OAuth2 endpoints.
 		Endpoint: provider.Endpoint(),
@@ -99,7 +99,7 @@ func Login(c *gin.Context) {
 		w.Write(data)
 	})
 
-	log.Printf("listening on http://%s/", "127.0.0.1:5556")
-	log.Fatal(http.ListenAndServe("127.0.0.1:5556", nil))
+	log.Printf("listening on http://%s/", "localhost:5556")
+	log.Fatal(http.ListenAndServe("localhost:5556", nil))
 
 }
