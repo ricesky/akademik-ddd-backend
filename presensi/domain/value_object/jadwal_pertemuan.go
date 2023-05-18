@@ -11,7 +11,6 @@ type JadwalPertemuan struct {
 }
 
 func NewJadwalPertemuan(waktuMulai time.Time, waktuSelesai time.Time) (JadwalPertemuan, error) {
-
 	if waktuMulai.IsZero() {
 		return JadwalPertemuan{}, errors.New("waktu_mulai_tidak_boleh_kosong")
 	}

@@ -50,13 +50,13 @@ func Test_kode_presensi_sesuai(t *testing.T) {
 
 }
 
-func Test_buat_kode_presensi_baru(t *testing.T) {
+func Test_buat_kode_presensi_random(t *testing.T) {
 
 	masaBerlaku := time.Date(2023, 05, 16, 11, 0, 0, 0, time.Local)
 	pattern := `^[0-9]{6}$`
 	regex := regexp.MustCompile(pattern)
 
-	kodePresensi, err := BuatKodePresensiBaru(masaBerlaku)
+	kodePresensi, err := GenerateRandomKodePresensi(masaBerlaku)
 
 	if err != nil {
 		t.Fatalf("seharusnya tidak muncul error")

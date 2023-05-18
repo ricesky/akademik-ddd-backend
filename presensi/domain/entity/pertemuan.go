@@ -93,7 +93,7 @@ func (p *Pertemuan) Mulai(
 		masaBerlakuKodePresensi = p.jadwal.WaktuMulai().Add(durasiBerlaku)
 	}
 
-	kodePresensiBaru, err := vo.BuatKodePresensiBaru(masaBerlakuKodePresensi)
+	kodePresensiBaru, err := vo.GenerateRandomKodePresensi(masaBerlakuKodePresensi)
 
 	if err != nil {
 		return err

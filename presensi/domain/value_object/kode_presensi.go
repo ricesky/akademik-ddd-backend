@@ -16,24 +16,28 @@ type KodePresensi struct {
 	berlakuSampai time.Time
 }
 
+func (k KodePresensi) Kode() string {
+	return k.kode
+}
+
+func (k KodePresensi) BerlakuSampai() time.Time {
+	return k.berlakuSampai
+}
+
 func NewKodePresensi(kode string, berlakuSampai time.Time) (KodePresensi, error) {
 
 	if len(kode) != panjangKodePresensi {
-		return KodePresensi{"", time.Time{}}, errors.New("panjang_kode_presensi_tidak_sesuai")
+		return KodePresensi{}, errors.New("panjang_kode_presensi_tidak_sesuai")
 	}
 
 	if berlakuSampai.IsZero() {
-		return KodePresensi{"", time.Time{}}, errors.New("waktu_berlaku_sampai_tidak_valid")
+		return KodePresensi{}, errors.New("waktu_berlaku_sampai_tidak_valid")
 	}
 
 	return KodePresensi{kode, berlakuSampai}, nil
 }
 
-func NewNilKodePresensi() KodePresensi {
-	return KodePresensi{kode: "", berlakuSampai: time.Time{}}
-}
-
-func BuatKodePresensiBaru(masaBerlaku time.Time) (KodePresensi, error) {
+func GenerateRandomKodePresensi(masaBerlaku time.Time) (KodePresensi, error) {
 
 	var kode string
 
@@ -43,16 +47,4 @@ func BuatKodePresensiBaru(masaBerlaku time.Time) (KodePresensi, error) {
 	}
 
 	return NewKodePresensi(kode, masaBerlaku)
-}
-
-func (k KodePresensi) Kode() string {
-	return k.kode
-}
-
-func (k KodePresensi) BerlakuSampai() time.Time {
-	return k.berlakuSampai
-}
-
-func (k KodePresensi) IsNil() bool {
-	return len(k.kode) == 0 && k.berlakuSampai.IsZero()
 }
