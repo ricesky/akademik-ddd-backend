@@ -12,35 +12,33 @@ type JadwalPertemuan struct {
 
 func NewJadwalPertemuan(waktuMulai time.Time, waktuSelesai time.Time) (JadwalPertemuan, error) {
 
-	zeroTime := time.Time{}
-
 	if waktuMulai.IsZero() {
-		return JadwalPertemuan{zeroTime, zeroTime}, errors.New("waktu_mulai_tidak_boleh_kosong")
+		return JadwalPertemuan{}, errors.New("waktu_mulai_tidak_boleh_kosong")
 	}
 
 	if waktuSelesai.IsZero() {
-		return JadwalPertemuan{zeroTime, zeroTime}, errors.New("waktu_selesai_tidak_boleh_kosong")
+		return JadwalPertemuan{}, errors.New("waktu_selesai_tidak_boleh_kosong")
 	}
 
 	if waktuMulai.Equal(waktuSelesai) {
-		return JadwalPertemuan{zeroTime, zeroTime}, errors.New("waktu_mulai_dan_selesai_tidak_boleh_sama")
+		return JadwalPertemuan{}, errors.New("waktu_mulai_dan_selesai_tidak_boleh_sama")
 	}
 
 	if waktuMulai.After(waktuSelesai) {
-		return JadwalPertemuan{zeroTime, zeroTime}, errors.New("waktu_mulai_tidak_boleh_lebih_dari_waktu_selesai")
+		return JadwalPertemuan{}, errors.New("waktu_mulai_tidak_boleh_lebih_dari_waktu_selesai")
 	}
 
 	return JadwalPertemuan{waktuMulai, waktuSelesai}, nil
 }
 
-func (j JadwalPertemuan) WaktuMulai() time.Time {
+func (j *JadwalPertemuan) WaktuMulai() time.Time {
 	return j.waktuMulai
 }
 
-func (j JadwalPertemuan) WaktuSelesai() time.Time {
+func (j *JadwalPertemuan) WaktuSelesai() time.Time {
 	return j.waktuSelesai
 }
 
-func (j JadwalPertemuan) Equals(o JadwalPertemuan) bool {
+func (j *JadwalPertemuan) Equals(o JadwalPertemuan) bool {
 	return j.waktuMulai == o.waktuMulai && j.waktuSelesai == o.waktuSelesai
 }
