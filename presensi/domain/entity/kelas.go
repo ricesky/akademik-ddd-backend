@@ -59,7 +59,7 @@ func (k *Kelas) BuatPertemuanBaru(
 	}
 
 	status := vo.NewStatusPertemuanBelumDimulai()
-	kodePresensi := vo.NewNilKodePresensi()
+	kodePresensi := vo.KodePresensi{}
 
 	return NewPertemuan(
 		vo.PertemuanId(uuid.New()), k, urutan, ruanganId, jadwal, topik, mode, status, kodePresensi,

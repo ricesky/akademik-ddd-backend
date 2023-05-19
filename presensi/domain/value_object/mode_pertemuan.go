@@ -22,10 +22,6 @@ func NewModePertemuanHybrid() ModePertemuan {
 	return ModePertemuan{hybrid}
 }
 
-func (m ModePertemuan) Equals(o ModePertemuan) bool {
-	return m.mode == o.mode
-}
-
 func (m ModePertemuan) Mode() string {
 	return m.mode
 }

@@ -43,10 +43,6 @@ func (s StatusPertemuan) IsTerlewat() bool {
 	return s.status == terlewat
 }
 
-func (s StatusPertemuan) Equals(o StatusPertemuan) bool {
-	return s.status == o.status
-}
-
 func (s StatusPertemuan) Status() string {
 	return s.status
 }
