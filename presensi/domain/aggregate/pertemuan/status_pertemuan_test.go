@@ -3,15 +3,15 @@ package pertemuan_test
 import (
 	"testing"
 
-	vo "its.id/akademik/presensi/domain/value_object"
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 func Test_kode_status_pertemuan_sesuai(t *testing.T) {
 
-	statusBelumDimulai := vo.NewStatusPertemuanBelumDimulai()
-	statusSedangBerlangsung := vo.NewStatusPertemuanSedangBerlangsung()
-	statusSelesai := vo.NewStatusPertemuanSelesai()
-	statusTerlewat := vo.NewStatusPertemuanTerlewat()
+	statusBelumDimulai := pertemuan.NewStatusPertemuanBelumDimulai()
+	statusSedangBerlangsung := pertemuan.NewStatusPertemuanSedangBerlangsung()
+	statusSelesai := pertemuan.NewStatusPertemuanSelesai()
+	statusTerlewat := pertemuan.NewStatusPertemuanTerlewat()
 
 	if !statusBelumDimulai.IsBelumDimulai() {
 		t.Fatal("status belum dimulai tidak sesuai")

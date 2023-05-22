@@ -1,4 +1,4 @@
-package kehadiran_dosen
+package pertemuan
 
 const (
 	hadirOnline  string = "D"

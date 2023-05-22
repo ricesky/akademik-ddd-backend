@@ -5,14 +5,14 @@ import (
 	"testing"
 	"time"
 
-	vo "its.id/akademik/presensi/domain/value_object"
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 func Test_waktu_mulai_selesai_tidak_boleh_sama(t *testing.T) {
 
 	tt := time.Date(2023, 05, 13, 0, 0, 0, 0, time.Local)
 
-	j, err := vo.NewJadwalPertemuan(tt, tt)
+	j, err := pertemuan.NewJadwalPertemuan(tt, tt)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -37,7 +37,7 @@ func Test_waktu_mulai_tidak_boleh_lebih_dari_waktu_selesai(t *testing.T) {
 	waktuMulai := time.Date(2023, 05, 13, 1, 0, 0, 0, time.Local)
 	waktuSelesai := time.Date(2023, 05, 13, 0, 0, 0, 0, time.Local)
 
-	j, err := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+	j, err := pertemuan.NewJadwalPertemuan(waktuMulai, waktuSelesai)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -61,7 +61,7 @@ func Test_argumen_waktu_mulai_tidak_boleh_kosong(t *testing.T) {
 
 	tt := time.Time{}
 
-	j, err := vo.NewJadwalPertemuan(tt, tt)
+	j, err := pertemuan.NewJadwalPertemuan(tt, tt)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -85,7 +85,7 @@ func Test_argumen_waktu_selesai_tidak_boleh_kosong(t *testing.T) {
 	waktuMulai := time.Date(2023, 05, 13, 1, 0, 0, 0, time.Local)
 	waktuSelesai := time.Time{}
 
-	j, err := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+	j, err := pertemuan.NewJadwalPertemuan(waktuMulai, waktuSelesai)
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -109,8 +109,8 @@ func Test_equality(t *testing.T) {
 	waktuMulai := time.Date(2023, 05, 13, 1, 0, 0, 0, time.Local)
 	waktuSelesai := time.Date(2023, 05, 13, 2, 0, 0, 0, time.Local)
 
-	j1, _ := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
-	j2, _ := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+	j1, _ := pertemuan.NewJadwalPertemuan(waktuMulai, waktuSelesai)
+	j2, _ := pertemuan.NewJadwalPertemuan(waktuMulai, waktuSelesai)
 
 	if j1 != j2 {
 		t.Fatal("hasil perbandingan tidak sama")

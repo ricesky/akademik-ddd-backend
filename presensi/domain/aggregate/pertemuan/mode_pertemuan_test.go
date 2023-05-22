@@ -3,14 +3,14 @@ package pertemuan_test
 import (
 	"testing"
 
-	vo "its.id/akademik/presensi/domain/value_object"
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 func Test_kode_mode_pertemuan_sesuai(t *testing.T) {
 
-	online := vo.NewModePertemuanOnline()
-	offline := vo.NewModePertemuanOffline()
-	hybrid := vo.NewModePertemuanHybrid()
+	online := pertemuan.NewModePertemuanOnline()
+	offline := pertemuan.NewModePertemuanOffline()
+	hybrid := pertemuan.NewModePertemuanHybrid()
 
 	if !online.IsOnline() {
 		t.Fatal("status online tidak sesuai")

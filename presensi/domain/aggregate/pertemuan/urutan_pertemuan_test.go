@@ -3,12 +3,12 @@ package pertemuan_test
 import (
 	"testing"
 
-	vo "its.id/akademik/presensi/domain/value_object"
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 func Test_urutan_pertemuan_sesuai(t *testing.T) {
 
-	u, err := vo.NewUrutanPertemuan(1)
+	u, err := pertemuan.NewUrutanPertemuan(1)
 
 	if u.Urutan() != 1 {
 		t.Fatal("urutan tidak sesuai")
@@ -22,7 +22,7 @@ func Test_urutan_pertemuan_sesuai(t *testing.T) {
 
 func Test_urutan_pertemuan_tidak_boleh_sama_dengan_nol(t *testing.T) {
 
-	_, err := vo.NewUrutanPertemuan(0)
+	_, err := pertemuan.NewUrutanPertemuan(0)
 
 	if err == nil {
 		t.Fatal("seharusnya muncul error")
@@ -32,7 +32,7 @@ func Test_urutan_pertemuan_tidak_boleh_sama_dengan_nol(t *testing.T) {
 
 func Test_urutan_pertemuan_tidak_boleh_kurang_dari_nol(t *testing.T) {
 
-	_, err := vo.NewUrutanPertemuan(-1)
+	_, err := pertemuan.NewUrutanPertemuan(-1)
 
 	if err == nil {
 		t.Fatal("seharusnya muncul error")
@@ -42,8 +42,8 @@ func Test_urutan_pertemuan_tidak_boleh_kurang_dari_nol(t *testing.T) {
 
 func Test_urutan_pertemuan_equal(t *testing.T) {
 
-	u1, _ := vo.NewUrutanPertemuan(1)
-	u2, _ := vo.NewUrutanPertemuan(1)
+	u1, _ := pertemuan.NewUrutanPertemuan(1)
+	u2, _ := pertemuan.NewUrutanPertemuan(1)
 
 	if u1 != u2 {
 		t.Fatal("seharusnya equal")

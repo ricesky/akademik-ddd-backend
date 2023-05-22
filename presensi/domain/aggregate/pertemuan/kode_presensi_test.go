@@ -4,11 +4,13 @@ import (
 	"regexp"
 	"testing"
 	"time"
+
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 func Test_panjang_kode_presensi_tidak_sesuai(t *testing.T) {
 
-	_, err := NewKodePresensi("1", time.Time{})
+	_, err := pertemuan.NewKodePresensi("1", time.Time{})
 
 	if err == nil {
 		t.Fatal("seharusnya muncul error")
@@ -19,7 +21,7 @@ func Test_panjang_kode_presensi_tidak_sesuai(t *testing.T) {
 
 func Test_waktu_berlaku_kode_presensi_tidak_sesuai(t *testing.T) {
 
-	_, err := NewKodePresensi("123456", time.Time{})
+	_, err := pertemuan.NewKodePresensi("123456", time.Time{})
 
 	if err == nil {
 		t.Fatal("seharusnya muncul error")
@@ -33,7 +35,7 @@ func Test_kode_presensi_sesuai(t *testing.T) {
 	kode := "123456"
 	time := time.Date(2023, 5, 13, 1, 0, 0, 0, time.Local)
 
-	kp, err := NewKodePresensi(kode, time)
+	kp, err := pertemuan.NewKodePresensi(kode, time)
 
 	if err != nil {
 		t.Log(err.Error())
@@ -56,15 +58,15 @@ func Test_buat_kode_presensi_random(t *testing.T) {
 	pattern := `^[0-9]{6}$`
 	regex := regexp.MustCompile(pattern)
 
-	kodePresensi, err := GenerateRandomKodePresensi(masaBerlaku)
+	kodePresensi, err := pertemuan.GenerateRandomKodePresensi(masaBerlaku)
 
 	if err != nil {
 		t.Fatalf("seharusnya tidak muncul error")
 	}
 
-	t.Logf("Kode presensi: %s", kodePresensi.kode)
+	t.Logf("Kode presensi: %s", kodePresensi.Kode())
 
-	if !regex.MatchString(kodePresensi.kode) {
+	if !regex.MatchString(kodePresensi.Kode()) {
 		t.Fatal("kode presensi tidak sesuai format")
 	}
 }

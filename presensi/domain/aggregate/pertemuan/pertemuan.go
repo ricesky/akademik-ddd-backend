@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"its.id/akademik/presensi/domain/kelas"
+	"its.id/akademik/presensi/domain/aggregate/kelas"
 )
 
 const (
@@ -41,6 +41,22 @@ func NewPertemuan(
 	kodePresensi KodePresensi,
 ) (*Pertemuan, error) {
 
+	if kelas.RencanaPertemuan() <= 0 {
+		errors.New("tidak_dapat_buat_pertemuan_baru_karena_belum_ada_rencana_pertemuan")
+	}
+
+	if kelas.IsSelesai() {
+		errors.New("tidak_dapat_membuat_pertemuan_baru_karena_kelas_sudah_selesai")
+	}
+
+	if mode.IsOffline() && ruanganId == RuanganId(uuid.Nil) {
+		errors.New("mode_tatap_muka_offline_harus_memiliki_ruangan")
+	}
+
+	if mode.IsHybrid() && ruanganId == RuanganId(uuid.Nil) {
+		errors.New("mode_tatap_muka_hybrid_harus_memiliki_ruangan")
+	}
+
 	return &Pertemuan{
 		id:           id,
 		kelas:        kelas,
@@ -54,13 +70,13 @@ func NewPertemuan(
 	}, nil
 }
 
-func (p *Pertemuan) ID() vo.PertemuanId {
+func (p *Pertemuan) ID() PertemuanId {
 	return p.id
 }
 
 func (p *Pertemuan) Mulai(
-	mode vo.ModePertemuan,
-	bentukKehadiran vo.BentukKehadiran,
+	mode ModePertemuan,
+	bentukKehadiran BentukKehadiran,
 	menitBerlaku int,
 ) error {
 
@@ -97,28 +113,16 @@ func (p *Pertemuan) Mulai(
 		masaBerlakuKodePresensi = p.jadwal.WaktuMulai().Add(durasiBerlaku)
 	}
 
-	kodePresensiBaru, err := vo.GenerateRandomKodePresensi(masaBerlakuKodePresensi)
+	kodePresensiBaru, err := GenerateRandomKodePresensi(masaBerlakuKodePresensi)
 
 	if err != nil {
 		return err
 	}
 
 	p.kodePresensi = kodePresensiBaru
-	p.status = vo.NewStatusPertemuanSedangBerlangsung()
+	p.status = NewStatusPertemuanSedangBerlangsung()
 
 	return nil
-}
-
-func (p *Pertemuan) Akhiri() {
-	// TODO: implement function akhiri
-}
-
-func (p *Pertemuan) Lupa(mode vo.ModePertemuan) {
-	// TODO: implement function lupa
-}
-
-func (p *Pertemuan) GantiKodePresensi() {
-
 }
 
 func (p *Pertemuan) isBolehMulaiPertemuan() bool {

@@ -1,8 +1,8 @@
 package kehadiran_dosen
 
 import (
-	"its.id/akademik/presensi/domain/dosen"
-	"its.id/akademik/presensi/domain/pertemuan"
+	"its.id/akademik/presensi/domain/aggregate/dosen"
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 type KehadiranDosenId struct {

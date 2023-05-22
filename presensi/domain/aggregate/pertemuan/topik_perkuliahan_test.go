@@ -3,7 +3,7 @@ package pertemuan_test
 import (
 	"testing"
 
-	vo "its.id/akademik/presensi/domain/value_object"
+	"its.id/akademik/presensi/domain/aggregate/pertemuan"
 )
 
 func Test_panjang_deskripsi_topik_perkuliahan_sesuai(t *testing.T) {
@@ -11,7 +11,7 @@ func Test_panjang_deskripsi_topik_perkuliahan_sesuai(t *testing.T) {
 	di := "1"
 	de := "1"
 
-	_, err := vo.NewTopikPerkuliahan(di, de)
+	_, err := pertemuan.NewTopikPerkuliahan(di, de)
 
 	if err == nil {
 		t.Fatal("seharusnya muncul error")
@@ -25,7 +25,7 @@ func Test_deskripsi_topik_perkuliahan_sesuai(t *testing.T) {
 	di := "deskripsi topik perkuliahan bahasa Indonesia"
 	de := "course topic description in English"
 
-	tp, _ := vo.NewTopikPerkuliahan(di, de)
+	tp, _ := pertemuan.NewTopikPerkuliahan(di, de)
 
 	if tp.Deskripsi() != di {
 		t.Fatalf("deskripsi %s seharusnya %s", tp.Deskripsi(), di)
