@@ -112,9 +112,7 @@ func Test_equality(t *testing.T) {
 	j1, _ := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
 	j2, _ := vo.NewJadwalPertemuan(waktuMulai, waktuSelesai)
 
-	equal := j1.Equals(j2)
-
-	if !equal {
+	if j1 != j2 {
 		t.Fatal("hasil perbandingan tidak sama")
 	}
 

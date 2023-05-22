@@ -60,8 +60,13 @@ func (k *Kelas) BuatPertemuanBaru(
 		errors.New("mode_tatap_muka_hybrid_harus_memiliki_ruangan")
 	}
 
+<<<<<<< HEAD:presensi/domain/kelas/kelas.go
 	status := NewStatusPertemuanBelumDimulai()
 	kodePresensi := NewNilKodePresensi()
+=======
+	status := vo.NewStatusPertemuanBelumDimulai()
+	kodePresensi := vo.KodePresensi{}
+>>>>>>> 2bcd6eae9530105e457c5425ab8be9ea9be77724:presensi/domain/entity/kelas.go
 
 	return NewPertemuan(
 		PertemuanId(uuid.New()), k, urutan, ruanganId, jadwal, topik, mode, status, kodePresensi,

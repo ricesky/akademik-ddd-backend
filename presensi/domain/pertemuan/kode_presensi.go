@@ -16,12 +16,16 @@ type KodePresensi struct {
 	berlakuSampai time.Time
 }
 
-func (k KodePresensi) Kode() string {
+func (k *KodePresensi) Kode() string {
 	return k.kode
 }
 
-func (k KodePresensi) BerlakuSampai() time.Time {
+func (k *KodePresensi) BerlakuSampai() time.Time {
 	return k.berlakuSampai
+}
+
+func (k *KodePresensi) IsZero() bool {
+	return len(k.kode) == 0 && k.berlakuSampai.IsZero()
 }
 
 func NewKodePresensi(kode string, berlakuSampai time.Time) (KodePresensi, error) {

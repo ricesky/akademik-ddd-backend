@@ -37,7 +37,3 @@ func (j *JadwalPertemuan) WaktuMulai() time.Time {
 func (j *JadwalPertemuan) WaktuSelesai() time.Time {
 	return j.waktuSelesai
 }
-
-func (j *JadwalPertemuan) Equals(o JadwalPertemuan) bool {
-	return j.waktuMulai == o.waktuMulai && j.waktuSelesai == o.waktuSelesai
-}

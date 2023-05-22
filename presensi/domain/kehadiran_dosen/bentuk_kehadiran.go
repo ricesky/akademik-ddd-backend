@@ -28,7 +28,3 @@ func (b BentukKehadiran) IsHadirOnline() bool {
 func (b BentukKehadiran) IsHadirOffline() bool {
 	return b.kehadiran == hadirOffline
 }
-
-func (b BentukKehadiran) Equals(o BentukKehadiran) bool {
-	return b.kehadiran == o.kehadiran
-}

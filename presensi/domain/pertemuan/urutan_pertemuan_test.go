@@ -45,7 +45,7 @@ func Test_urutan_pertemuan_equal(t *testing.T) {
 	u1, _ := vo.NewUrutanPertemuan(1)
 	u2, _ := vo.NewUrutanPertemuan(1)
 
-	if !u1.Equals(u2) {
+	if u1 != u2 {
 		t.Fatal("seharusnya equal")
 	}
 
