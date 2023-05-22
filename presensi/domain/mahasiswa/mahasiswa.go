@@ -1,20 +1,22 @@
-package entity
+package mahasiswa
 
 import (
-	vo "its.id/akademik/presensi/domain/value_object"
+	"github.com/google/uuid"
 )
 
+type MahasiswaId uuid.UUID
+
 type Mahasiswa struct {
-	id   vo.MahasiswaId
+	id   MahasiswaId
 	nama string
 	nim  string
 }
 
-func NewMahasiswa(id vo.MahasiswaId, nama string, nim string) *Mahasiswa {
+func NewMahasiswa(id MahasiswaId, nama string, nim string) *Mahasiswa {
 	return &Mahasiswa{id, nama, nim}
 }
 
-func (m *Mahasiswa) ID() vo.MahasiswaId {
+func (m *Mahasiswa) ID() MahasiswaId {
 	return m.id
 }
 

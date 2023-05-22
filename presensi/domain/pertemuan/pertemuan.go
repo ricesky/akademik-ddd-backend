@@ -1,11 +1,12 @@
-package entity
+package pertemuan
 
 import (
 	"errors"
 	"fmt"
 	"time"
 
-	vo "its.id/akademik/presensi/domain/value_object"
+	"github.com/google/uuid"
+	"its.id/akademik/presensi/domain/kelas"
 )
 
 const (
@@ -13,28 +14,31 @@ const (
 	minimalMasaBerlakuKodePresensi int = 15
 )
 
+type PertemuanId uuid.UUID
+type RuanganId uuid.UUID
+
 type Pertemuan struct {
-	id           vo.PertemuanId
-	kelas        *Kelas
-	urutan       vo.UrutanPertemuan
-	ruanganId    vo.RuanganId
-	jadwal       vo.JadwalPertemuan
-	topik        vo.TopikPerkuliahan
-	mode         vo.ModePertemuan
-	status       vo.StatusPertemuan
-	kodePresensi vo.KodePresensi
+	id           PertemuanId
+	kelas        *kelas.Kelas
+	urutan       UrutanPertemuan
+	ruanganId    RuanganId
+	jadwal       JadwalPertemuan
+	topik        TopikPerkuliahan
+	mode         ModePertemuan
+	status       StatusPertemuan
+	kodePresensi KodePresensi
 }
 
 func NewPertemuan(
-	id vo.PertemuanId,
-	kelas *Kelas,
-	urutan vo.UrutanPertemuan,
-	ruanganId vo.RuanganId,
-	jadwal vo.JadwalPertemuan,
-	topik vo.TopikPerkuliahan,
-	mode vo.ModePertemuan,
-	status vo.StatusPertemuan,
-	kodePresensi vo.KodePresensi,
+	id PertemuanId,
+	kelas *kelas.Kelas,
+	urutan UrutanPertemuan,
+	ruanganId RuanganId,
+	jadwal JadwalPertemuan,
+	topik TopikPerkuliahan,
+	mode ModePertemuan,
+	status StatusPertemuan,
+	kodePresensi KodePresensi,
 ) (*Pertemuan, error) {
 
 	return &Pertemuan{

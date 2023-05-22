@@ -1,4 +1,4 @@
-package value_object
+package pertemuan_test
 
 import (
 	"regexp"

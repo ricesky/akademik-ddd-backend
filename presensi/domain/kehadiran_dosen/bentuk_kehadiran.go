@@ -1,4 +1,4 @@
-package value_object
+package kehadiran_dosen
 
 const (
 	hadirOnline  string = "D"

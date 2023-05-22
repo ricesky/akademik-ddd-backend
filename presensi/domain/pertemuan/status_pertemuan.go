@@ -1,4 +1,4 @@
-package value_object
+package pertemuan
 
 const (
 	belumDimulai      = "1"
