@@ -13,3 +13,7 @@ type Kelas struct {
 	WaktuSelesai string
 	Pengajar     []Dosen
 }
+
+type KelasQueryHandler interface {
+	GetById() *Kelas
+}

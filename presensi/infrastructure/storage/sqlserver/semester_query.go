@@ -7,16 +7,16 @@ import (
 	"its.id/akademik/presensi/application/query"
 )
 
-type SqlServerSemesterAktifQuery struct {
+type SqlServerSemesterQueryHandler struct {
 	db  *sql.DB
 	ctx context.Context
 }
 
-func NewSqlServerSemesterAktifQuery(db *sql.DB, ctx context.Context) query.SemesterAktifQuery {
-	return &SqlServerSemesterAktifQuery{db, ctx}
+func NewSqlServerSemesterQueryHandler(db *sql.DB, ctx context.Context) query.SemesterQueryHandler {
+	return &SqlServerSemesterQueryHandler{db, ctx}
 }
 
-func (s *SqlServerSemesterAktifQuery) Execute() (*query.SemesterAktif, error) {
+func (s *SqlServerSemesterQueryHandler) GetAktif() (*query.Semester, error) {
 
 	tsql := `SELECT s.id_semester, s.nama, s.nama_en
 			FROM semester s
@@ -38,7 +38,7 @@ func (s *SqlServerSemesterAktifQuery) Execute() (*query.SemesterAktif, error) {
 			return nil, err
 		}
 
-		return &query.SemesterAktif{SemesterId: id, Nama: nama}, nil
+		return &query.Semester{SemesterId: id, Nama: nama}, nil
 	}
 
 	return nil, nil

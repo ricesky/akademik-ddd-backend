@@ -11,7 +11,7 @@ import (
 	_ "github.com/microsoft/go-mssqldb"
 
 	"github.com/gin-gonic/gin"
-	"its.id/akademik/presensi/infrastructure/handler"
+	ginhandler "its.id/akademik/presensi/infrastructure/http/gin"
 	"its.id/akademik/presensi/infrastructure/storage/sqlserver"
 )
 
@@ -47,8 +47,8 @@ func main() {
 	}
 	fmt.Printf("Connected!\n")
 
-	dosenQuery := sqlserver.NewSqlServerDosenQuery(db, ctx)
-	dosenHandler := handler.NewDosenHandler(dosenQuery)
+	dosenQuery := sqlserver.NewSqlServerDosenQueryHandler(db, ctx)
+	dosenHandler := ginhandler.NewDosenHandler(dosenQuery)
 
 	mode := os.Getenv("GIN_MODE")
 

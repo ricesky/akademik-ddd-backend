@@ -13,3 +13,7 @@ type KelasDosen struct {
 	WaktuMulai   string
 	WaktuSelesai string
 }
+
+type DaftarKelasDosenQueryHandler interface {
+	Execute(dosenId string, semesterId int) ([]KelasDosen, error)
+}

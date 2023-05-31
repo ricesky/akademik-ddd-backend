@@ -1,4 +1,4 @@
-package handler
+package gin
 
 import (
 	"net/http"
@@ -13,10 +13,10 @@ type DosenResponse struct {
 }
 
 type DosenHandler struct {
-	dosenQuery query.DosenQuery
+	dosenQuery query.DosenQueryHandler
 }
 
-func NewDosenHandler(dosenQuery query.DosenQuery) *DosenHandler {
+func NewDosenHandler(dosenQuery query.DosenQueryHandler) *DosenHandler {
 	return &DosenHandler{dosenQuery: dosenQuery}
 }
 
@@ -29,14 +29,16 @@ func (d *DosenHandler) GetDosen(c *gin.Context) {
 		return
 	}
 
-	dosen, err := d.dosenQuery.Execute(userId)
+	dosen, err := d.dosenQuery.GetByUserId(userId)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
 
 	if dosen == nil {
 		c.JSON(http.StatusNotFound, nil)
+		return
 	}
 
 	response := DosenResponse{

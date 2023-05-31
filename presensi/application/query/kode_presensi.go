@@ -8,3 +8,7 @@ type KodePresensi struct {
 	BerlakuSampai string
 	Payload       string
 }
+
+type KodePresensiQueryHandler interface {
+	GetById(pertemuanId uuid.UUID) *KodePresensi
+}

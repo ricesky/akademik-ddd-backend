@@ -6,3 +6,7 @@ type Dosen struct {
 	DosenId uuid.UUID
 	Nama    string
 }
+
+type DosenQueryHandler interface {
+	GetByUserId(userId string) (*Dosen, error)
+}

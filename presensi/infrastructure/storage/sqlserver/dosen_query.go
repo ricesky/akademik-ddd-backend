@@ -8,16 +8,16 @@ import (
 	"its.id/akademik/presensi/application/query"
 )
 
-type SqlServerDosenQuery struct {
+type SqlServerDosenQueryHandler struct {
 	db  *sql.DB
 	ctx context.Context
 }
 
-func NewSqlServerDosenQuery(db *sql.DB, ctx context.Context) query.DosenQuery {
-	return &SqlServerDosenQuery{db, ctx}
+func NewSqlServerDosenQueryHandler(db *sql.DB, ctx context.Context) query.DosenQueryHandler {
+	return &SqlServerDosenQueryHandler{db, ctx}
 }
 
-func (s *SqlServerDosenQuery) Execute(userId string) (*query.Dosen, error) {
+func (s *SqlServerDosenQueryHandler) GetByUserId(userId string) (*query.Dosen, error) {
 
 	tsql := `SELECT d.id_dosen, d.nama
 			 FROM dosen d
