@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"its.id/akademik/presensi/domain/aggregate/pertemuan"
+	"its.id/akademik/presensi/domain/pertemuan"
 )
 
 func Test_waktu_mulai_selesai_tidak_boleh_sama(t *testing.T) {

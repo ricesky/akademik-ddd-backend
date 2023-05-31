@@ -5,6 +5,6 @@ type Ruangan struct {
 	Kode      string
 }
 
-type DaftarRuanganQueryHandler interface {
-	Execute() []Ruangan
+type RuanganQueryHandler interface {
+	GetAll() []Ruangan
 }

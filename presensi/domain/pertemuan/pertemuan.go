@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"its.id/akademik/presensi/domain/aggregate/kelas"
+	"its.id/akademik/presensi/domain/kelas"
 )
 
 const (
@@ -74,6 +74,10 @@ func (p *Pertemuan) ID() PertemuanId {
 	return p.id
 }
 
+func (p *Pertemuan) Ubah() {
+
+}
+
 func (p *Pertemuan) Mulai(
 	mode ModePertemuan,
 	bentukKehadiran BentukKehadiran,
@@ -121,6 +125,41 @@ func (p *Pertemuan) Mulai(
 
 	p.kodePresensi = kodePresensiBaru
 	p.status = NewStatusPertemuanSedangBerlangsung()
+
+	return nil
+}
+
+func (p *Pertemuan) Akhiri() error {
+
+	if p.kelas.IsSelesai() {
+		return errors.New("tidak_dapat_mengakhiri_pertemuan_karena_kelas_sudah_selesai")
+	}
+
+	if p.status.IsBelumDimulai() {
+		return errors.New("tidak_dapat_mengakhiri_pertemuan_yang_belum_dimulai")
+	}
+
+	if p.status.IsTerlewat() {
+		return errors.New("tidak_dapat_mengakhiri_pertemuan_yang_terlewat")
+	}
+
+	p.status = NewStatusPertemuanSelesai()
+
+	return nil
+}
+
+func (p *Pertemuan) Lupa(mode ModePertemuan) error {
+
+	if p.kelas.IsSelesai() {
+		return errors.New("tidak_dapat_mengakhiri_pertemuan_karena_kelas_sudah_selesai")
+	}
+
+	if p.status.IsSedangBerlangsung() || p.status.IsSelesai() {
+		return errors.New("tidak_dapat_menandai_lupa_presensi_pada_pertemuan_yang_sedang_berlangsung_atau_selesai")
+	}
+
+	p.status = NewStatusPertemuanSelesai()
+	p.mode = mode
 
 	return nil
 }

@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"its.id/akademik/presensi/domain/aggregate/pertemuan"
+	"its.id/akademik/presensi/domain/pertemuan"
 )
 
 func Test_panjang_kode_presensi_tidak_sesuai(t *testing.T) {

@@ -14,6 +14,6 @@ type KelasDosen struct {
 	WaktuSelesai string
 }
 
-type DaftarKelasDosenQueryHandler interface {
-	Execute(dosenId string, semesterId int) ([]KelasDosen, error)
+type KelasDosenQueryHandler interface {
+	GetByDosenAndSemesterId(dosenId string, semesterId int) ([]KelasDosen, error)
 }

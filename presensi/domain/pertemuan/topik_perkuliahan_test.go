@@ -3,7 +3,7 @@ package pertemuan_test
 import (
 	"testing"
 
-	"its.id/akademik/presensi/domain/aggregate/pertemuan"
+	"its.id/akademik/presensi/domain/pertemuan"
 )
 
 func Test_panjang_deskripsi_topik_perkuliahan_sesuai(t *testing.T) {
