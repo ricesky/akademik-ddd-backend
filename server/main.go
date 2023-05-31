@@ -7,24 +7,31 @@ import (
 	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/microsoft/go-mssqldb"
 
 	"github.com/gin-gonic/gin"
 	"its.id/akademik/presensi/infrastructure/handler"
-	"its.id/akademik/presensi/infrastructure/sqlserver"
-)
-
-const (
-	host     string = "10.199.14.47"
-	port     int    = 1433
-	database string = "PRESENSI_DDD"
-	user     string = "presensi_ddd_app"
-	password string = "presensi_ddd_app123#"
+	"its.id/akademik/presensi/infrastructure/storage/sqlserver"
 )
 
 func main() {
 
-	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s;", host, user, password, port, database)
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	var (
+		dbhost     string = os.Getenv("DB_HOST")
+		dbport     string = os.Getenv("DB_PORT")
+		dbname     string = os.Getenv("DB_NAME")
+		dbuser     string = os.Getenv("DB_USER")
+		dbpassword string = os.Getenv("DB_PASSWORD")
+	)
+
+	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%s;database=%s;", dbhost, dbuser, dbpassword, dbport, dbname)
 
 	// Create connection pool
 	db, err := sql.Open("sqlserver", connString)
