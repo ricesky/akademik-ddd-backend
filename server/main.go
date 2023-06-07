@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 	_ "github.com/microsoft/go-mssqldb"
 
@@ -46,6 +47,13 @@ func main() {
 		log.Fatal(err.Error())
 	}
 	fmt.Printf("Connected!\n")
+
+	dosenRepo := sqlserver.NewSqlServerDosenRepository(db, ctx)
+
+	dosenId, _ := uuid.Parse("fb02200b-1ec8-4c24-a10c-000a9430d47e")
+	d, _ := dosenRepo.GetById(dosenId)
+
+	log.Println(d.Nama())
 
 	dosenQuery := sqlserver.NewSqlServerDosenQueryHandler(db, ctx)
 	dosenHandler := ginhandler.NewDosenHandler(dosenQuery)

@@ -17,7 +17,7 @@ func NewSqlServerDosenQueryHandler(db *sql.DB, ctx context.Context) query.DosenQ
 	return &SqlServerDosenQueryHandler{db, ctx}
 }
 
-func (s *SqlServerDosenQueryHandler) GetByUserId(userId string) (*query.Dosen, error) {
+func (s *SqlServerDosenQueryHandler) GetByUserId(userId string) (*query.DosenQueryResult, error) {
 
 	tsql := `SELECT d.id_dosen, d.nama
 			 FROM dosen d
@@ -39,7 +39,7 @@ func (s *SqlServerDosenQueryHandler) GetByUserId(userId string) (*query.Dosen, e
 			return nil, err
 		}
 
-		return &query.Dosen{DosenId: id, Nama: nama}, nil
+		return &query.DosenQueryResult{DosenId: id, Nama: nama}, nil
 	}
 
 	return nil, nil

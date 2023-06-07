@@ -1,10 +1,15 @@
 package query
 
-type Ruangan struct {
-	RuanganId string
+import "github.com/google/uuid"
+
+type RuanganId = uuid.UUID
+
+type RuanganQueryResult struct {
+	RuanganId RuanganId
 	Kode      string
+	Nama      string
 }
 
 type RuanganQueryHandler interface {
-	GetAll() []Ruangan
+	GetAll() ([]RuanganQueryResult, error)
 }

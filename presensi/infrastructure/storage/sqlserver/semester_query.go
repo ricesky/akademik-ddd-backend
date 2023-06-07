@@ -16,7 +16,7 @@ func NewSqlServerSemesterQueryHandler(db *sql.DB, ctx context.Context) query.Sem
 	return &SqlServerSemesterQueryHandler{db, ctx}
 }
 
-func (s *SqlServerSemesterQueryHandler) GetAktif() (*query.Semester, error) {
+func (s *SqlServerSemesterQueryHandler) GetAktif() (*query.SemesterQueryResult, error) {
 
 	tsql := `SELECT s.id_semester, s.nama, s.nama_en
 			FROM semester s
@@ -38,7 +38,7 @@ func (s *SqlServerSemesterQueryHandler) GetAktif() (*query.Semester, error) {
 			return nil, err
 		}
 
-		return &query.Semester{SemesterId: id, Nama: nama}, nil
+		return &query.SemesterQueryResult{SemesterId: id, Nama: nama}, nil
 	}
 
 	return nil, nil

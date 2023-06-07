@@ -1,8 +1,8 @@
 package kehadiran_mahasiswa
 
 import (
-	"its.id/akademik/presensi/domain/aggregate/mahasiswa"
-	"its.id/akademik/presensi/domain/aggregate/pertemuan"
+	"its.id/akademik/presensi/domain/mahasiswa"
+	"its.id/akademik/presensi/domain/pertemuan"
 )
 
 type KehadiranMahasiswaId struct {

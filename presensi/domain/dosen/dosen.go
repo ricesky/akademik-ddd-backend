@@ -4,7 +4,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type DosenId uuid.UUID
+type DosenId = uuid.UUID
 
 type Dosen struct {
 	id   DosenId

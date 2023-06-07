@@ -11,7 +11,7 @@ type Kelas struct {
 	Hari         string
 	WaktuMulai   string
 	WaktuSelesai string
-	Pengajar     []Dosen
+	Pengajar     []string
 }
 
 type KelasQueryHandler interface {

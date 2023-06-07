@@ -4,7 +4,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type KelasId uuid.UUID
+type KelasId = uuid.UUID
 
 type Kelas struct {
 	id               KelasId

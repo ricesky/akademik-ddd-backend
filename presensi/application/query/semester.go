@@ -1,10 +1,10 @@
 package query
 
-type Semester struct {
+type SemesterQueryResult struct {
 	SemesterId int
 	Nama       string
 }
 
 type SemesterQueryHandler interface {
-	GetAktif() (*Semester, error)
+	GetAktif() (*SemesterQueryResult, error)
 }

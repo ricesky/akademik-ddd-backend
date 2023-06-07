@@ -2,11 +2,11 @@ package query
 
 import "github.com/google/uuid"
 
-type Dosen struct {
+type DosenQueryResult struct {
 	DosenId uuid.UUID
 	Nama    string
 }
 
 type DosenQueryHandler interface {
-	GetByUserId(userId string) (*Dosen, error)
+	GetByUserId(userId string) (*DosenQueryResult, error)
 }
