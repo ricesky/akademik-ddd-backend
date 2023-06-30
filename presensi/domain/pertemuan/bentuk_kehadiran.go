@@ -1,5 +1,7 @@
 package pertemuan
 
+import "errors"
+
 const (
 	hadirOnline  string = "D"
 	hadirOffline string = "L"
@@ -7,6 +9,20 @@ const (
 
 type BentukKehadiran struct {
 	kehadiran string
+}
+
+func NewBentukKehadiran(bentuk string) (BentukKehadiran, error) {
+
+	if bentuk == hadirOnline {
+		return BentukKehadiran{hadirOnline}, nil
+	}
+
+	if bentuk == hadirOffline {
+		return BentukKehadiran{hadirOffline}, nil
+	}
+
+	return BentukKehadiran{}, errors.New("bentuk kehadiran tidak valid")
+
 }
 
 func NewBentukKehadiranOnline() BentukKehadiran {

@@ -15,7 +15,7 @@ func NewDosen(id DosenId, nama string) *Dosen {
 	return &Dosen{id, nama}
 }
 
-func (d *Dosen) ID() DosenId {
+func (d *Dosen) Id() DosenId {
 	return d.id
 }
 

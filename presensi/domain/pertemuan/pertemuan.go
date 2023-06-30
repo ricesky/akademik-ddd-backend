@@ -29,7 +29,7 @@ type Pertemuan struct {
 	kodePresensi KodePresensi
 }
 
-func NewPertemuan(
+func BuildPertemuan(
 	id PertemuanId,
 	kelas *kelas.Kelas,
 	urutan UrutanPertemuan,
@@ -42,19 +42,15 @@ func NewPertemuan(
 ) (*Pertemuan, error) {
 
 	if kelas.RencanaPertemuan() <= 0 {
-		errors.New("tidak_dapat_buat_pertemuan_baru_karena_belum_ada_rencana_pertemuan")
-	}
-
-	if kelas.IsSelesai() {
-		errors.New("tidak_dapat_membuat_pertemuan_baru_karena_kelas_sudah_selesai")
+		return nil, errors.New("tidak_dapat_buat_pertemuan_baru_karena_belum_ada_rencana_pertemuan")
 	}
 
 	if mode.IsOffline() && ruanganId == RuanganId(uuid.Nil) {
-		errors.New("mode_tatap_muka_offline_harus_memiliki_ruangan")
+		return nil, errors.New("mode_tatap_muka_offline_harus_memiliki_ruangan")
 	}
 
 	if mode.IsHybrid() && ruanganId == RuanganId(uuid.Nil) {
-		errors.New("mode_tatap_muka_hybrid_harus_memiliki_ruangan")
+		return nil, errors.New("mode_tatap_muka_hybrid_harus_memiliki_ruangan")
 	}
 
 	return &Pertemuan{
@@ -70,8 +66,45 @@ func NewPertemuan(
 	}, nil
 }
 
-func (p *Pertemuan) ID() PertemuanId {
+func NewPertemuan(
+	kelas *kelas.Kelas,
+	urutan UrutanPertemuan,
+	ruanganId RuanganId,
+	jadwal JadwalPertemuan,
+	topik TopikPerkuliahan,
+	mode ModePertemuan,
+) (*Pertemuan, error) {
+
+	pertemuanId, err := uuid.NewUUID()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return BuildPertemuan(
+		PertemuanId(pertemuanId),
+		kelas,
+		urutan,
+		ruanganId,
+		jadwal,
+		topik,
+		mode,
+		NewStatusPertemuanBelumDimulai(),
+		KodePresensi{},
+	)
+
+}
+
+func (p *Pertemuan) Id() PertemuanId {
 	return p.id
+}
+
+func (p *Pertemuan) Kelas() *kelas.Kelas {
+	return p.kelas
+}
+
+func (p *Pertemuan) Urutan() UrutanPertemuan {
+	return p.urutan
 }
 
 func (p *Pertemuan) Ubah() {
@@ -162,6 +195,10 @@ func (p *Pertemuan) Lupa(mode ModePertemuan) error {
 	p.mode = mode
 
 	return nil
+}
+
+func (p *Pertemuan) IsUrutanPertemuanSama(other *Pertemuan) bool {
+	return p.urutan.EqualTo(other.urutan)
 }
 
 func (p *Pertemuan) isBolehMulaiPertemuan() bool {

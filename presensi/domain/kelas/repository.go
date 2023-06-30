@@ -1,5 +1,5 @@
 package kelas
 
 type KelasRepository interface {
-	GetById(kelasId KelasId) (*Kelas, error)
+	FindById(kelasId KelasId) (*Kelas, error)
 }

@@ -16,7 +16,7 @@ func NewMahasiswa(id MahasiswaId, nama string, nim string) *Mahasiswa {
 	return &Mahasiswa{id, nama, nim}
 }
 
-func (m *Mahasiswa) ID() MahasiswaId {
+func (m *Mahasiswa) Id() MahasiswaId {
 	return m.id
 }
 

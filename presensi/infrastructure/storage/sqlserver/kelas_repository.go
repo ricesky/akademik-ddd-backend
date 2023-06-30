@@ -16,7 +16,7 @@ func NewSqlServerKelasRepository(db *sql.DB, ctx context.Context) kelas.KelasRep
 	return &SqlServerKelasRepository{db, ctx}
 }
 
-func (s *SqlServerKelasRepository) GetById(id kelas.KelasId) (*kelas.Kelas, error) {
+func (s *SqlServerKelasRepository) FindById(id kelas.KelasId) (*kelas.Kelas, error) {
 
 	tsql := `SELECT k.id_kelas, k.rencana_tm, k.is_nilai_final
 			 FROM kelas k

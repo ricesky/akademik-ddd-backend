@@ -16,7 +16,7 @@ func NewKelas(id KelasId, rencanaPertemuan int, selesai bool) (*Kelas, error) {
 	return &Kelas{id, rencanaPertemuan, selesai}, nil
 }
 
-func (k *Kelas) ID() KelasId {
+func (k *Kelas) Id() KelasId {
 	return k.id
 }
 

@@ -15,6 +15,10 @@ func NewUrutanPertemuan(urutan int) (UrutanPertemuan, error) {
 	return UrutanPertemuan{urutan}, nil
 }
 
-func (u UrutanPertemuan) Urutan() int {
+func (u *UrutanPertemuan) Urutan() int {
 	return u.urutan
+}
+
+func (u *UrutanPertemuan) EqualTo(other UrutanPertemuan) bool {
+	return u.urutan == other.urutan
 }

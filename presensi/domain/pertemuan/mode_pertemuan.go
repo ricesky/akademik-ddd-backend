@@ -1,5 +1,7 @@
 package pertemuan
 
+import "errors"
+
 const (
 	online  = "D"
 	offline = "L"
@@ -8,6 +10,22 @@ const (
 
 type ModePertemuan struct {
 	mode string
+}
+
+func NewModePertemuan(mode string) (ModePertemuan, error) {
+	if mode == online {
+		return NewModePertemuanOnline(), nil
+	}
+
+	if mode == offline {
+		return NewModePertemuanOffline(), nil
+	}
+
+	if mode == hybrid {
+		return NewModePertemuanHybrid(), nil
+	}
+
+	return ModePertemuan{}, errors.New("Mode pertemuan tidak valid")
 }
 
 func NewModePertemuanOnline() ModePertemuan {

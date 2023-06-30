@@ -16,7 +16,7 @@ func NewSqlServerDosenRepository(db *sql.DB, ctx context.Context) dosen.DosenRep
 	return &SqlServerDosenRepository{db, ctx}
 }
 
-func (s *SqlServerDosenRepository) GetById(id dosen.DosenId) (*dosen.Dosen, error) {
+func (s *SqlServerDosenRepository) FindById(id dosen.DosenId) (*dosen.Dosen, error) {
 
 	tsql := `SELECT d.id_dosen, d.nama
 			 FROM dosen d

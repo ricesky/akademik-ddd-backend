@@ -1,5 +1,7 @@
 package pertemuan
 
+import "errors"
+
 const (
 	belumDimulai      = "1"
 	sedangBerlangsung = "2"
@@ -9,6 +11,27 @@ const (
 
 type StatusPertemuan struct {
 	status string
+}
+
+func NewStatusPertemuan(status string) (StatusPertemuan, error) {
+
+	if status == belumDimulai {
+		return StatusPertemuan{belumDimulai}, nil
+	}
+
+	if status == sedangBerlangsung {
+		return StatusPertemuan{sedangBerlangsung}, nil
+	}
+
+	if status == selesai {
+		return StatusPertemuan{sedangBerlangsung}, nil
+	}
+
+	if status == terlewat {
+		return StatusPertemuan{terlewat}, nil
+	}
+
+	return StatusPertemuan{}, errors.New("status pertemuan tidak valid")
 }
 
 func NewStatusPertemuanBelumDimulai() StatusPertemuan {

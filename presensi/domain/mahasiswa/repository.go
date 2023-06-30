@@ -1,5 +1,5 @@
 package mahasiswa
 
 type MahasiswaRepository interface {
-	ById(id MahasiswaId) (*Mahasiswa, error)
+	FindById(id MahasiswaId) (*Mahasiswa, error)
 }

@@ -27,10 +27,14 @@ func NewTopikPerkuliahan(deskripsi string, deskripsiEn string) (TopikPerkuliahan
 	return TopikPerkuliahan{deskripsi, deskripsiEn}, nil
 }
 
-func (t TopikPerkuliahan) Deskripsi() string {
+func (t *TopikPerkuliahan) Deskripsi() string {
 	return t.deskripsi
 }
 
-func (t TopikPerkuliahan) DeskripsiEn() string {
+func (t *TopikPerkuliahan) DeskripsiEn() string {
 	return t.deskripsiEn
+}
+
+func (t *TopikPerkuliahan) IsZero() bool {
+	return len(t.deskripsi) == 0 && len(t.deskripsiEn) == 0
 }
