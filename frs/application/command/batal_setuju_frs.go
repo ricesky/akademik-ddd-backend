@@ -6,7 +6,7 @@ type BatalSetujuFrsRequest struct {
 type BatalSetujuFrsCommand struct {
 }
 
-func NewBatalSetujuFrsCommand() (*SetujuFrsCommand, error) {
+func NewBatalSetujuFrsCommand() (*BatalSetujuFrsCommand, error) {
 	return nil, nil
 }
 

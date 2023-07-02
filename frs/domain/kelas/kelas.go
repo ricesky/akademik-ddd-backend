@@ -9,10 +9,10 @@ import (
 type KelasId = uuid.UUID
 
 type Kelas struct {
-	id        KelasId
-	sks       int
-	kapasitas int
-	terisi    int
+	id         KelasId
+	mataKuliah MataKuliah
+	kapasitas  int
+	terisi     int
 }
 
 func (k *Kelas) IncrementTerisi() error {
@@ -45,8 +45,8 @@ func (k *Kelas) Id() KelasId {
 	return k.id
 }
 
-func (k *Kelas) Sks() int {
-	return k.sks
+func (k *Kelas) MataKuliah() MataKuliah {
+	return k.mataKuliah
 }
 
 func (k *Kelas) Kapasitas() int {
@@ -55,4 +55,12 @@ func (k *Kelas) Kapasitas() int {
 
 func (k *Kelas) Terisi() int {
 	return k.terisi
+}
+
+func (k *Kelas) EqualTo(other *Kelas) bool {
+	return k.id == other.id
+}
+
+func (k *Kelas) IsMataKuliahSama(other *Kelas) bool {
+	return k.mataKuliah.EqualTo(other.mataKuliah)
 }

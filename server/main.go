@@ -51,7 +51,7 @@ func main() {
 	dosenRepo := sqlserver.NewSqlServerDosenRepository(db, ctx)
 
 	dosenId, _ := uuid.Parse("fb02200b-1ec8-4c24-a10c-000a9430d47e")
-	d, _ := dosenRepo.GetById(dosenId)
+	d, _ := dosenRepo.FindById(dosenId)
 
 	log.Println(d.Nama())
 

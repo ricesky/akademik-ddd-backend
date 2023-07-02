@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
+	"its.id/akademik/frs/domain/dosen"
 	"its.id/akademik/frs/domain/kelas"
 	"its.id/akademik/frs/domain/mahasiswa"
-	"its.id/akademik/presensi/domain/dosen"
 )
 
 const (
@@ -38,6 +38,7 @@ type Frs struct {
 func NewFrs(id FrsId, semesterId SemesterId, mahasiswaId mahasiswa.MahasiswaId, ips float64) (*Frs, error) {
 
 	var bebanStudiMaks int = 0
+
 	if ips < ips2_50 {
 		bebanStudiMaks = bebanStudiMaks18Sks
 	} else if ips >= ips2_50 && ips < ips3_00 {
@@ -62,13 +63,15 @@ func NewFrs(id FrsId, semesterId SemesterId, mahasiswaId mahasiswa.MahasiswaId, 
 
 func (f *Frs) TambahKuliahByDosen(kelas *kelas.Kelas) error {
 
-	totalSksAmbilBaru := f.sksAmbil + kelas.Sks()
+	mk := kelas.MataKuliah()
+
+	totalSksAmbilBaru := f.sksAmbil + mk.Sks()
 
 	if totalSksAmbilBaru > totalSksAmbilMaks {
 		return errors.New("tidak dapat melebihi batas total 24 sks")
 	}
 
-	f.kuliahAmbil = append(f.kuliahAmbil, &Kuliah{kelas.Id()})
+	f.kuliahAmbil = append(f.kuliahAmbil, &Kuliah{kelas.Id(), kelas.MataKuliah()})
 	f.sksAmbil = totalSksAmbilBaru
 
 	return nil
@@ -76,7 +79,9 @@ func (f *Frs) TambahKuliahByDosen(kelas *kelas.Kelas) error {
 
 func (f *Frs) TambahKuliahByMahasiswa(kelas *kelas.Kelas) error {
 
-	totalSksAmbilBaru := f.sksAmbil + kelas.Sks()
+	mk := kelas.MataKuliah()
+
+	totalSksAmbilBaru := f.sksAmbil + mk.Sks()
 
 	if totalSksAmbilBaru > totalSksAmbilMaks {
 		return errors.New("tidak dapat melebihi batas total 24 sks")
@@ -86,7 +91,7 @@ func (f *Frs) TambahKuliahByMahasiswa(kelas *kelas.Kelas) error {
 		return fmt.Errorf("tidak dapat melebihi batas total %d sks sesuai indeks prestasi semester", f.sksBatas)
 	}
 
-	f.kuliahAmbil = append(f.kuliahAmbil, &Kuliah{kelas.Id()})
+	f.kuliahAmbil = append(f.kuliahAmbil, &Kuliah{kelas.Id(), kelas.MataKuliah()})
 	f.sksAmbil = totalSksAmbilBaru
 
 	return nil

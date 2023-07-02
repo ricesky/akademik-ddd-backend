@@ -1,4 +1,5 @@
 package kelas
 
-type Kelasepository interface {
+type KelasRepository interface {
+	FindById(id KelasId) (*Kelas, error)
 }

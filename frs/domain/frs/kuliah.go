@@ -1,7 +1,8 @@
 package frs
 
-import "its.id/akademik/presensi/domain/kelas"
+import "its.id/akademik/frs/domain/kelas"
 
 type Kuliah struct {
-	kelasId kelas.KelasId
+	kelasId    kelas.KelasId
+	mataKuliah kelas.MataKuliah
 }
