@@ -12,8 +12,8 @@ import (
 	_ "github.com/microsoft/go-mssqldb"
 
 	"github.com/gin-gonic/gin"
-	ginhandler "its.id/akademik/presensi/infrastructure/http/gin"
 	"its.id/akademik/presensi/infrastructure/storage/sqlserver"
+	ginhandler "its.id/akademik/presensi/presentation"
 )
 
 func main() {
